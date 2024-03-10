@@ -2,7 +2,7 @@
 
 // initialized in main.cc
 uint32_t DRAM_MTPS, DRAM_DBUS_RETURN_TIME, DRAM_DBUS_MAX_CAS,
-         tRP, tRCD, tCAS;
+         tRP, tRCD, tCAS, tCXL;
 
 void print_dram_config()
 {
@@ -12,6 +12,7 @@ void print_dram_config()
         << "tRP " << tRP_DRAM_NANOSECONDS << endl
         << "tRCD " << tRCD_DRAM_NANOSECONDS << endl
         << "tCAS " << tCAS_DRAM_NANOSECONDS << endl
+        << "tCXL " << "0ns ~ 80ns" << endl
         << "dram_dbus_turn_around_time " << DRAM_DBUS_TURN_AROUND_TIME << endl
         << "dram_write_high_wm " << DRAM_WRITE_HIGH_WM << endl
         << "dram_write_low_wm " << DRAM_WRITE_LOW_WM << endl
@@ -236,9 +237,9 @@ void MEMORY_CONTROLLER::schedule(PACKET_QUEUE *queue)
 
         uint64_t LATENCY = 0;
         if (row_buffer_hit)  
-            LATENCY = tCAS;
+            LATENCY = tCAS + tCXL;
         else 
-            LATENCY = tRP + tRCD + tCAS;
+            LATENCY = tRP + tRCD + tCAS + tCXL;
 
         uint64_t op_addr = queue->entry[oldest_index].address;
         uint32_t op_cpu = queue->entry[oldest_index].cpu,

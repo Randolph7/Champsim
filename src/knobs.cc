@@ -31,6 +31,10 @@ namespace knob
 	bool     measure_cache_acc = true;
 	uint64_t measure_cache_acc_epoch = 1024;
 
+	// Randolph
+    // CXL latency option
+    uint32_t cxl_latency;
+
 	/* next-line */
 	vector<int32_t>  next_line_deltas;
 	vector<float>  next_line_delta_prob;
@@ -404,6 +408,13 @@ int parse_knobs(void* user, const char* section, const char* name, const char* v
     {
 		knob::measure_cache_acc_epoch = atoi(value);
     }
+
+	// Randolph
+	/* CXL latency */
+	else if(MATCH("", "cxl_latency"))
+	{
+		knob::cxl_latency = atoi(value);
+	}
 
     /* next-line */
     else if (MATCH("", "next_line_deltas"))

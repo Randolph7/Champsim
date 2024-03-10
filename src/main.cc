@@ -43,6 +43,7 @@ namespace knob
     extern uint64_t measure_dram_bw_epoch;
     extern bool     measure_cache_acc;
     extern uint64_t measure_cache_acc_epoch;
+    extern uint32_t cxl_latency;
     extern bool l1d_perfect;
     extern bool l2c_perfect;
     extern bool llc_perfect;
@@ -641,6 +642,10 @@ int main(int argc, char** argv)
     tRP  = (uint32_t)((1.0 * tRP_DRAM_NANOSECONDS  * CPU_FREQ) / 1000);
     tRCD = (uint32_t)((1.0 * tRCD_DRAM_NANOSECONDS * CPU_FREQ) / 1000);
     tCAS = (uint32_t)((1.0 * tCAS_DRAM_NANOSECONDS * CPU_FREQ) / 1000);
+
+    // Randolph
+    // CXL latency
+    tCXL = (uint32_t)((1.0 * knob::cxl_latency * CPU_FREQ) / 1000);
 
     // default: 16 = (64 / 8) * (3200 / 1600)
     // it takes 16 CPU cycles to tranfser 64B cache block on a 8B (64-bit) bus
