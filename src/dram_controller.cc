@@ -1,4 +1,10 @@
 #include "dram_controller.h"
+#include "knobs.h"
+
+namespace knob
+{
+    extern uint32_t cxl_latency;
+}
 
 // initialized in main.cc
 uint32_t DRAM_MTPS, DRAM_DBUS_RETURN_TIME, DRAM_DBUS_MAX_CAS,
@@ -12,7 +18,7 @@ void print_dram_config()
         << "tRP " << tRP_DRAM_NANOSECONDS << endl
         << "tRCD " << tRCD_DRAM_NANOSECONDS << endl
         << "tCAS " << tCAS_DRAM_NANOSECONDS << endl
-        << "tCXL " << "0ns ~ 80ns" << endl
+        << "tCXL " << knob::cxl_latency << endl
         << "dram_dbus_turn_around_time " << DRAM_DBUS_TURN_AROUND_TIME << endl
         << "dram_write_high_wm " << DRAM_WRITE_HIGH_WM << endl
         << "dram_write_low_wm " << DRAM_WRITE_LOW_WM << endl
