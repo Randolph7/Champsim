@@ -63,7 +63,7 @@
 #define LOG2_DRAM_BANKS 3
 #define DRAM_ROWS 65536      // 2KB * 32K rows => 64MB per bank
 #define LOG2_DRAM_ROWS 16
-#define DRAM_COLUMNS 128      // 64B * 32 column chunks (Assuming 1B DRAM cell * 8 chips * 8 transactions = 64B size of column chunks) => 2KB per row
+#define DRAM_COLUMNS 128     // 64B * 32 column chunks (Assuming 1B DRAM cell * 8 chips * 8 transactions = 64B size of column chunks) => 2KB per row
 #define LOG2_DRAM_COLUMNS 7
 #define DRAM_ROW_SIZE (BLOCK_SIZE*DRAM_COLUMNS/1024)
 

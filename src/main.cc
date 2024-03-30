@@ -30,6 +30,9 @@ uint8_t warmup_complete[NUM_CPUS],
         MAX_INSTR_DESTINATIONS = NUM_INSTR_DESTINATIONS;
 uint64_t champsim_seed;
 
+uint64_t globalMinAddr = 10000000000000;           // 初始化为最大可能值
+uint64_t globalMaxAddr = 0;           // 初始化为0，假设地址不会是负数
+
 namespace knob
 {
     extern uint64_t warmup_instructions;
@@ -1041,6 +1044,10 @@ int main(int argc, char** argv)
     uncore.LLC.llc_replacement_final_stats();
     print_dram_stats();
 #endif
+
+    // Final address range.
+    printf("Min Address: %llu\n", (unsigned long long)globalMinAddr);
+    printf("Max Address: %llu\n", (unsigned long long)globalMaxAddr);
 
     return 0;
 }

@@ -28,6 +28,20 @@ void print_dram_config()
         << endl;
 }
 
+// 函数更新最小和最大地址
+void updateAddrRange(uint64_t addr) 
+{   
+    // 如果地址不是0，则考虑更新最小地址
+    if (addr != 0 && addr < globalMinAddr) {
+        globalMinAddr = addr;
+    }
+
+    // 更新最大地址，无需检查是否为0，除非你也想对最大地址有特殊的规则
+    if (addr > globalMaxAddr) {
+        globalMaxAddr = addr;
+    }
+}
+
 void MEMORY_CONTROLLER::reset_remain_requests(PACKET_QUEUE *queue, uint32_t channel)
 {
     for (uint32_t i=0; i<queue->SIZE; i++) {
@@ -90,6 +104,7 @@ void MEMORY_CONTROLLER::reset_remain_requests(PACKET_QUEUE *queue, uint32_t chan
 #endif
 }
 
+// Main work
 void MEMORY_CONTROLLER::operate()
 {
     for (uint32_t i=0; i<DRAM_CHANNELS; i++) {
@@ -155,7 +170,7 @@ void MEMORY_CONTROLLER::schedule(PACKET_QUEUE *queue)
 
     // first, search for the oldest open row hit
     for (uint32_t i=0; i<queue->SIZE; i++) {
-
+        // cout << " address: " << queue->entry[i].address << endl; 
         // already scheduled
         if (queue->entry[i].scheduled) 
             continue;
@@ -306,10 +321,18 @@ void MEMORY_CONTROLLER::process(PACKET_QUEUE *queue)
 
     uint8_t  op_type = queue->entry[request_index].type;
     uint64_t op_addr = queue->entry[request_index].address;
+    // print op_addr in hex
+    
     uint32_t op_cpu = queue->entry[request_index].cpu,
              op_channel = dram_get_channel(op_addr), 
              op_rank = dram_get_rank(op_addr), 
              op_bank = dram_get_bank(op_addr);
+        
+        // update addr range 
+             updateAddrRange(op_rank);
+            //  cout << "op_channel: " << op_channel << endl;
+            //  cout << "op_rank: " << op_rank << endl;
+            //  cout << "op_bank: " << op_bank << endl;
 #ifdef DEBUG_PRINT
     uint32_t op_row = dram_get_row(op_addr), 
              op_column = dram_get_column(op_addr);
