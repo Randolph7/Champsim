@@ -1,3 +1,0 @@
---warmup_instructions=100000000 --simulation_instructions=500000000 --l2c_prefetcher_types=bingo --config=/media/ext_hdd/CXL_Cache/config/bingo.ini --dram_io_freq=150  -traces /media/ext_hdd/CXL_Cache/traces/429.mcf-184B.champsimtrace.xz 
-./bin/perceptron-multi-multi-no-ship-1core /media/ext_hdd/CXL_Cache/bin/perceptron-multi-multi-no-ship-1core --warmup_instructions=100000000 --simulation_instructions=500000000 --l2c_prefetcher_types=mlop --config=./config/mlop.ini --dram_io_freq=150  -traces ../traces/spec2k17/602.gcc_s-1850B.champsimtrace.xz
---warmup_instructions=100000000 --simulation_instructions=500000000 --l2c_prefetcher_types=mlop --config=./config/mlop.ini --dram_io_freq=150 -cxl_latency=80  -traces ../traces/spec2k17/602.gcc_s-1850B.champsimtrace.xz
