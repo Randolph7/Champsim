@@ -21,6 +21,9 @@ extern uint32_t DRAM_MTPS, DRAM_DBUS_RETURN_TIME, DRAM_DBUS_MAX_CAS;
 #define DRAM_WRITE_LOW_WM     ((DRAM_WQ_SIZE*3)>>2) // 6/8th
 #define MIN_DRAM_WRITES_PER_SWITCH (DRAM_WQ_SIZE*1/4)
 
+extern uint64_t globalMinAddr;           // 初始化为最大可能值
+extern uint64_t globalMaxAddr;           // 初始化为最小可能值
+
 void print_dram_config();
 
 // DRAM
