@@ -1,4 +1,3 @@
-This is the experimental version of Champsim/Pythia with CXL channel.
 
 <p align="center">
   <a href="https://github.com/CMU-SAFARI/Pythia">
